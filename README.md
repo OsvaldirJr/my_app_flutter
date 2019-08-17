@@ -1,6 +1,6 @@
 # my_app
 
-A new Flutter project.
+Esse projeto refere-se a uma carteira de vacina, feito para uma turma do colégio adventista de Esteio- RS
 
 ## Getting Started
 

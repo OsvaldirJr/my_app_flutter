@@ -1,21 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:my_app/Vacinas/vaccineMock.dart';
+import 'package:my_app/diseases/diseasesClass.dart';
 import 'package:my_app/menu.dart';
-import 'package:my_app/vaccineClass.dart';
 
-import 'Vacinas/myvaccinepage.dart';
+import 'diseases.dart';
+import 'diseasesMock.dart';
 
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
-
-  final String title;
-
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  final _biggerFont = const TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold);
+class MyDiseasesHomePage extends StatelessWidget {
+  final _biggerFont =
+      const TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold);
 
   @override
   Widget build(BuildContext context) {
@@ -23,16 +15,15 @@ class _MyHomePageState extends State<MyHomePage> {
     menu.context = context;
     //todo mock de vacines
 
-    
-    Future<List<Vaccine>> _getVaccine(){
-      VaccineMock mock = new VaccineMock();
+    Future<List<Disease>> _getDisease() {
+      DiseasesMock mock = new DiseasesMock();
       mock.setProperty();
-      return Future.value(mock.vacinas);
+      return Future.value(mock.doencas);
     }
-    
+
     return Scaffold(
         appBar: AppBar(
-          title: Text(widget.title),
+          title: Text("Doenças"),
         ),
         body: Center(
           child: Stack(children: [
@@ -40,27 +31,27 @@ class _MyHomePageState extends State<MyHomePage> {
               Padding(
                   padding: EdgeInsets.all(18),
                   child: Text(
-                    "Minhas Vacinas",
-                    style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
+                    "Doenças Evitáveis",
+                    style: _biggerFont,
                     textAlign: TextAlign.center,
                   )),
             ]),
-              Container(
+            Container(
               margin: EdgeInsets.fromLTRB(0, 50, 0, 0),
               child: FutureBuilder(
-                  future: _getVaccine(),
+                  future: _getDisease(),
                   builder: (BuildContext context, AsyncSnapshot snapshot) {
                     return ListView.builder(
                       itemCount: snapshot.data.length,
                       itemBuilder: (BuildContext context, int index) {
                         return ListTile(
                           title: Text(
-                            snapshot.data[index].name+" - "+snapshot.data[index].date+" - "+snapshot.data[index].upa,
+                            snapshot.data[index].name,
                           ),
                           onTap: () {
                             Navigator.push(context, MaterialPageRoute(
                               builder: (context) {
-                                return MyVaccinePage(snapshot.data[index]);
+                                return MyDiseasesPage(snapshot.data[index]);
                               },
                             ));
                           },
@@ -69,8 +60,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     );
                   }),
             ),
-            ],
-          ),
+          ]),
         ),
         drawer: menu.getMenu());
   }
