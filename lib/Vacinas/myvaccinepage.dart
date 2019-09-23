@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_app/custom/color.dart';
 import 'package:my_app/menu.dart';
 
 import '../vaccineClass.dart';
@@ -9,6 +10,10 @@ class MyVaccinePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    CustomColor customColor = new CustomColor();
+    customColor.setcolor();
+  
     if (vac == null) {
       vac = new Vaccine();
       vac.name = "errou";
@@ -48,8 +53,8 @@ class MyVaccinePage extends StatelessWidget {
         onPressed: () {
           Navigator.pop(context);
         },
-        child: Icon(Icons.check),
-        backgroundColor: Colors.blue,
+        child: Icon(Icons.check, color: Colors.white,),
+        backgroundColor: customColor.colorCustom,
       ),
     );
   }

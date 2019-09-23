@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:my_app/diseases/diseasesClass.dart';
+import 'package:my_app/prevention/preventionClass.dart';
 import 'package:my_app/menu.dart';
 
-import 'diseases.dart';
-import 'diseasesMock.dart';
+import 'prevention.dart';
+import 'preventionMock.dart';
 
-class MyDiseasesHomePage extends StatelessWidget {
+class MyPreventionHomePage extends StatelessWidget {
   final _biggerFont =
       const TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold);
 
@@ -15,15 +15,15 @@ class MyDiseasesHomePage extends StatelessWidget {
     menu.context = context;
     //todo mock de vacines
 
-    Future<List<Disease>> _getDisease() {
-      DiseasesMock mock = new DiseasesMock();
+    Future<List<Prevention>> _getDisease() {
+      PreventionMock mock = new PreventionMock();
       mock.setProperty();
-      return Future.value(mock.doencas);
+      return Future.value(mock.preventivemethods);
     }
 
     return Scaffold(
         appBar: AppBar(
-          title: Text("Doenças"),
+          title: Text("Prevenção"),
         ),
         body: Center(
           child: Stack(children: [
@@ -31,7 +31,7 @@ class MyDiseasesHomePage extends StatelessWidget {
               Padding(
                   padding: EdgeInsets.all(18),
                   child: Text(
-                    "Doenças Evitáveis",
+                    "Métodos de prevenção",
                     style: _biggerFont,
                     textAlign: TextAlign.center,
                   )),
@@ -42,7 +42,7 @@ class MyDiseasesHomePage extends StatelessWidget {
                   future: _getDisease(),
                   builder: (BuildContext context, AsyncSnapshot snapshot) {
                     return ListView.builder(
-                      itemCount: snapshot.data != null ? snapshot.data.length : 0,
+                      itemCount: snapshot.data.length,
                       itemBuilder: (BuildContext context, int index) {
                         return ListTile(
                           title: Text(
@@ -51,7 +51,7 @@ class MyDiseasesHomePage extends StatelessWidget {
                           onTap: () {
                             Navigator.push(context, MaterialPageRoute(
                               builder: (context) {
-                                return MyDiseasesPage(snapshot.data[index]);
+                                return MyPreventionPage(snapshot.data[index]);
                               },
                             ));
                           },

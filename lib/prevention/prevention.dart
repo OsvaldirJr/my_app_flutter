@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/custom/color.dart';
-import 'package:my_app/diseases/diseasesClass.dart';
+import 'package:my_app/prevention/preventionClass.dart';
 import 'package:my_app/menu.dart';
 
-class MyDiseasesPage extends StatelessWidget {
-Disease vac = new Disease();
-MyDiseasesPage(this.vac);
+class MyPreventionPage extends StatelessWidget {
+Prevention vac = new Prevention();
+MyPreventionPage(this.vac);
 
   @override
   Widget build(BuildContext context) {
+  
   CustomColor customColor = new CustomColor();
   customColor.setcolor();
+
     var menu = Menu();
     menu.context = context;
         return Scaffold(
@@ -44,7 +46,7 @@ MyDiseasesPage(this.vac);
               
            },
            
-            child: Icon(Icons.check,color: Colors.white),
+            child: Icon(Icons.check, color: Colors.white),
            backgroundColor: customColor.colorCustom,
           ),
      
